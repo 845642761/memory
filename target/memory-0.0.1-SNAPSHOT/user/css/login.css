@@ -1,0 +1,8 @@
+/**
+ * @author:cheng_bo
+ * @date:2015年5月23日 23:35:28
+ */
+body{ margin:0; padding:0px;}
+ul{list-style-type:none}
+.loginBox{ width:600px; height:300px; margin: 0 auto; top:30%; position:relative; background-color: #ccc;}
+	.loginForm{ margin-top: 20px}
