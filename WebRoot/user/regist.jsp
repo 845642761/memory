@@ -7,7 +7,6 @@
     <meta charset="utf-8" />
     <title>memory系统注册</title>
   </head>
-  
   <body>
     
   </body>

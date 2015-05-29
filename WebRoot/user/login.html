@@ -3,15 +3,31 @@
 <head>
 <title>memory系统登录</title>
 <meta charset="utf-8" />
-<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="../common/css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/login.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-	<div class="loginBox">
-		<form action="/user/regist.do">
-			<input type="text" placeholder="请输入帐号" />
-			<input type="text" placeholder="请输入密码" />
-			<input type="submit" value="登录"/>
-		</form>
+<body class="login_bg">
+	<div class="login_wrapper">
+		<div class="login_box">
+			<!-- 左边 -->
+			<form action="/user/regist.do" class="loginForm">
+				<input type="text" placeholder="请输入登录邮箱地址" class="input"/>
+				<span class="error">请输入有效的邮箱地址，如：xx@memory.org</span>
+				<input type="password" placeholder="请输入密码" class="input"/>
+				<span class="error">请输入6-16位密码，字母区分大小写</span>
+				<label class="fl">
+					<input type="checkbox" />&nbsp;记住我
+				</label>
+				<a href="" class="fr" target="_blank">忘记密码？</a>
+				<input type="submit" class="submit" value="登 &nbsp; &nbsp; 录" />
+			</form>
+			
+			<!-- 右边 -->
+			<div class="login_right">
+				<div>还没有memory帐号？</div>
+				<a href="" class="registor_now">立即注册</a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
