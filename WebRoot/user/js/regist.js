@@ -4,21 +4,25 @@
  * @date 2015年6月1日 11:04:29
  */
 function loginIdIsExit(){
+	var strLoginIdTip=$('#strLoginIdTip');
+	strLoginIdTip.css("display","none");
 	var strLoginId=$('#strLoginId').val();
 	if(strLoginId==null || strLoginId==''){
-		alert('请输入正确的帐号！');
+		strLoginIdTip.html(strLoginIdTip.attr('msg'));
+		strLoginIdTip.css("display","block");
 		return false;
 	}
 	$.ajax({
 		type : 'POST',
-		url :'user/loginIdIsExit.do',
+		url :'/user/loginIdIsExit.do',
 		dataType : 'html',
-		data : strLoginId,
+		data : 'strLoginId='+strLoginId,
 		success:function(data) { 
 			if(data!=null && data=='ok'){
 				return true;
 			}else{
-				alert(data);
+				$('#strLoginIdTip').html(data);
+				$('#strLoginIdTip').css("display","block");
 				return false;
 			}
 		},
