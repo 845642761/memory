@@ -36,5 +36,15 @@ public class LoginUserService implements ILoginUserService{
 		else
 			return true;
 	}
+	
+	/**
+	 * 根据密码和帐号查询
+	 * @author cheng_bo
+	 * @date 2015年6月5日 16:55:38
+	 */
+	@Override
+	public LoginUser ssoLogin(String id, HashMap<Object, Object> hm) {
+		return mybatisDao.select(id, hm);
+	}
 
 }

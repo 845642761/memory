@@ -11,5 +11,6 @@ import java.util.HashMap;
 public interface IMybatisDao<T> {
 	public void add(String id,T t);	//添加
 	public void delete(String id,T t);	//删除
-	public int selectSize(String id,HashMap<Object, Object> hm);	//查询结果集
+	public int selectSize(String id,HashMap<Object, Object> hm);	//查询结果集大小
+	public T select(String id,HashMap<Object, Object> hm);	//查询结果集
 }

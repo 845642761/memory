@@ -8,6 +8,6 @@ import org.me.memory.entity.User;
  * @date:2015年5月21日 19:48:12 
  */
 public interface IUserService {
-	public void add(String id,User u);	//添加
-	public void delet(String id,User u);	//删除
+	public void add(String id,User user);	//添加
+	public boolean userIsExit(String strLoginId);	//用户帐号是否已存在
 }

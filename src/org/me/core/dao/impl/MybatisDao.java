@@ -26,4 +26,9 @@ public class MybatisDao<T> implements IMybatisDao<T>{
 		int size=sqlSession.selectOne(id, hm);
 		return size;
 	}
+
+	@Override
+	public T select(String id, HashMap<Object, Object> hm) {
+		return sqlSession.selectOne(id, hm);
+	}
 }

@@ -17,4 +17,12 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 登录 -->
+	<select id="ssoLogin" parameterType="LoginUser" resultType="LoginUser">
+		select * from mem_loginUser where strLoginId=#{strLoginId} and strPassword=#{strPassword}
+		<if test="nState==null">
+			and nState!=2
+		</if>
+	</select>
 </mapper>
