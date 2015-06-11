@@ -13,7 +13,7 @@ public class MybatisDao<T> implements IMybatisDao<T>{
 	private SqlSession sqlSession;
 
 	@Override
-	public void add(String id,T t) {
+	public void save(String id,T t) {
 		sqlSession.insert(id, t);
 	}
 	
@@ -28,7 +28,12 @@ public class MybatisDao<T> implements IMybatisDao<T>{
 	}
 
 	@Override
-	public T select(String id, HashMap<Object, Object> hm) {
+	public T get(String id, HashMap<Object, Object> hm) {
 		return sqlSession.selectOne(id, hm);
+	}
+
+	@Override
+	public void saveUpdate(String id, T t) {
+		sqlSession.update(id, t);
 	}
 }

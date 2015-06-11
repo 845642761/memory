@@ -15,8 +15,8 @@ public class UserService implements IUserService{
 	private IMybatisDao<User> mybatisDao;
 	
 	@Override
-	public void add(String id, User user) {
-		mybatisDao.add(id, user);
+	public void save(String id, User user) {
+		mybatisDao.save(id, user);
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class UserService implements IUserService{
 	 * @date 2015年6月5日 21:34:38
 	 */
 	@Override
-	public boolean userIsExit(String strLoginId) {
+	public boolean userInfoIsExit(String strLoginId) {
 		HashMap<Object, Object> hm=new HashMap<Object, Object>();
 		hm.put("strLoginId", strLoginId);
 		int size=mybatisDao.selectSize("org.me.memory.entity.User.selectSize", hm);
@@ -33,6 +33,16 @@ public class UserService implements IUserService{
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public void saveUpdate(String id, User u) {
+		mybatisDao.saveUpdate(id, u);
+	}
+
+	@Override
+	public User get(String id, HashMap<Object, Object> hm) {
+		return mybatisDao.get(id, hm);
 	}
 
 }

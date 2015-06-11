@@ -5,10 +5,10 @@
  */
 function login(){
 	if(!validation('strLoginId')){
-		return false;
+		return;
 	}
 	if(!validation('password')){
-		return false;
+		return;
 	}
 	$.ajax({
 		type : 'POST',
@@ -17,9 +17,9 @@ function login(){
 		success:function(data) { 
 			if(data!=null){
 				if(data=='ok'){
-					window.location.href='/user/main.jsp';
+					window.location.href='/system/main.do';
 				}else if(data=='addInfo'){
-					window.location.href='';
+					window.location.href='/user/addUserInfo.do';
 				}else{
 					alert(data);
 				}
@@ -27,7 +27,7 @@ function login(){
 		},
 		error : function() {    
 			alert("异常！");  
-			return false;
+			return;
 		}    
 	});
 }

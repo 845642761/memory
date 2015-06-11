@@ -15,8 +15,8 @@ public class LoginUserService implements ILoginUserService{
 	private IMybatisDao<LoginUser> mybatisDao;
 	
 	@Override
-	public void add(String id, LoginUser lu) {
-		mybatisDao.add(id, lu);
+	public void save(String id, LoginUser lu) {
+		mybatisDao.save(id, lu);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class LoginUserService implements ILoginUserService{
 	 */
 	@Override
 	public LoginUser ssoLogin(String id, HashMap<Object, Object> hm) {
-		return mybatisDao.select(id, hm);
+		return mybatisDao.get(id, hm);
 	}
 
 }

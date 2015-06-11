@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>memory</display-name>
 	<welcome-file-list>
-		<welcome-file>/user/login.html</welcome-file>
+		<welcome-file>/user/login.do</welcome-file>
 	</welcome-file-list>
 
 	<!-- log4j -->
@@ -41,6 +41,16 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+
+	<!-- 登录验证拦截器 -->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>org.me.memory.util.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>Character Encoding</filter-name>

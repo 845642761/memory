@@ -5,13 +5,13 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>memory</display-name>
 	<welcome-file-list>
-		<welcome-file>/user/login.html</welcome-file>
+		<welcome-file>/user/login.do</welcome-file>
 	</welcome-file-list>
 
 	<!-- log4j -->
 	<context-param>
-		<param-name>Log4jConfigListener</param-name>
-		<param-value>classpath:org/me/config/log4j.properties</param-value>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/org/me/config/log4j.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
@@ -41,6 +41,16 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+
+	<!-- 登录验证拦截器 -->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>org.me.memory.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>Character Encoding</filter-name>

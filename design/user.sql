@@ -17,7 +17,7 @@ DEFAULT CHARACTER SET=utf8;
 DROP TABLE IF EXISTS `mem_user`;
 CREATE TABLE `mem_user`(
 	strLoginId						VARCHAR(50)		NOT NULL,											-- 登录id（字母小写）
-	name							VARCHAR(30)		NOT NULL,											-- 姓名
+	strName							VARCHAR(30)		NOT NULL,											-- 姓名
 	nSex							TINYINT			NOT NULL DEFAULT 0,									-- 性别, 0-未填写,1-男,2-女
 	strMobile						VARCHAR(20)		NOT NULL,											-- 手机号
 	strPhone						VARCHAR(20),														-- 紧急联系人

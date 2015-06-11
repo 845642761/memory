@@ -10,7 +10,7 @@ import java.util.Date;
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String strLoginId;					// 登录id（字母小写）
-	private String name;						// 姓名
+	private String strName;						// 姓名
 	private int nSex;							// 性别, 0-未填写,1-男,2-女
 	private String strMobile;					// 手机号
 	private String strPhone;					// 紧急联系人
@@ -118,14 +118,6 @@ public class User implements Serializable{
 		this.strLoginId = strLoginId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getStrMobile() {
 		return strMobile;
 	}
@@ -165,5 +157,12 @@ public class User implements Serializable{
 	public void setDtUpdateTime(Date dtUpdateTime) {
 		this.dtUpdateTime = dtUpdateTime;
 	}
-	
+
+	public String getStrName() {
+		return strName;
+	}
+
+	public void setStrName(String strName) {
+		this.strName = strName;
+	}
 }
