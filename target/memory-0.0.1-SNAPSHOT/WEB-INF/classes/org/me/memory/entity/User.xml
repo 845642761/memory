@@ -22,19 +22,67 @@
 		update mem_user
 		<set>
 			<if test="dtBirthday!=null">
-				dtBirthday=#{dtBirthday}
+				dtBirthday=#{dtBirthday},
+			</if>
+			<if test="strName!=null">
+				strName=#{strName},
+			</if>
+			<if test="nSex!=null">
+				nSex=#{nSex},
+			</if>
+			<if test="strMobile!=null">
+				strMobile=#{strMobile},
+			</if>
+			<if test="strPhone!=null">
+				strPhone=#{strPhone},
+			</if>
+			<if test="strEmail!=null">
+				strEmail=#{strEmail},
+			</if>
+			<if test="strQQ!=null">
+				strQQ=#{strQQ},
+			</if>
+			<if test="strWeChar!=null">
+				strWeChar=#{strWeChar},
+			</if>
+			<if test="strProvinceCode!=null">
+				strProvinceCode=#{strProvinceCode},
+			</if>
+			<if test="strProvinceName!=null">
+				strProvinceName=#{strProvinceName},
+			</if>
+			<if test="strCityCode!=null">
+				strCityCode=#{strCityCode},
+			</if>
+			<if test="strCityName!=null">
+				strCityName=#{strCityName},
+			</if>
+			<if test="strHeadURL!=null">
+				strHeadURL=#{strHeadURL},
+			</if>
+			<if test="strAddress!=null">
+				strAddress=#{strAddress},
+			</if>
+				dtUpdateTime=now()
+		</set>
+		where strLoginId=#{strLoginId}
+	</update>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByRange" parameterType="HashMap">
+		select * from mem_user
+		<where>
+			<if test="strLoginId != null">
+				strLoginId=#{strLoginId}
 			</if>
 			<if test="name!=null">
-				strName=#{strName}
+				strName like '%#{strName}%'
 			</if>
 			<if test="nSex!=null">
 				nSex=#{nSex}
 			</if>
 			<if test="strMobile!=null">
 				strMobile=#{strMobile}
-			</if>
-			<if test="strPhone!=null">
-				strPhone=#{strPhone}
 			</if>
 			<if test="strEmail!=null">
 				strEmail=#{strEmail}
@@ -48,23 +96,13 @@
 			<if test="strProvinceCode!=null">
 				strProvinceCode=#{strProvinceCode}
 			</if>
-			<if test="strProvinceName!=null">
-				strProvinceName=#{strProvinceName}
-			</if>
 			<if test="strCityCode!=null">
 				strCityCode=#{strCityCode}
 			</if>
-			<if test="strCityName!=null">
-				strCityName=#{strCityName}
-			</if>
-			<if test="strHeadURL!=null">
-				strHeadURL=#{strHeadURL}
-			</if>
-			<if test="strAddress!=null">
-				strAddress=#{strAddress}
-			</if>
-				dtUpdateTime=now()
-		</set>
-		where strLoginId=#{strLoginId}
-	</update>
+		</where>
+	</select>
+	
+	<select id="get" parameterType="HashMap" resultType="User">
+		select * from mem_user where strLoginId=#{strLoginId}
+	</select>
 </mapper>

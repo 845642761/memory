@@ -5,10 +5,10 @@
  */
 function login(){
 	if(!validation('strLoginId')){
-		return false;
+		return;
 	}
 	if(!validation('password')){
-		return false;
+		return;
 	}
 	$.ajax({
 		type : 'POST',
@@ -27,7 +27,7 @@ function login(){
 		},
 		error : function() {    
 			alert("异常！");  
-			return false;
+			return;
 		}    
 	});
 }

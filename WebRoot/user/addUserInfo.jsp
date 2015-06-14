@@ -8,8 +8,7 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<form action="/user/saveUserInfo.do">
-		<input type="hidden" name="strLoginId" value="${user.strLoginId}"/>
+	<form action="/user/saveUserInfo.do" method="post">
 		姓名:<input type="text" name="strName" /><br>
 		性别:<select name="nSex">
 			<option value="0">请选择</option>
@@ -28,7 +27,6 @@
 			<input type="text" name="strCityName" /><br>
 		地址:<input type="text" name="strAddress" /><br>
 		头像:<input type="text" name="strHeadURL" /><br>
-		注册时间:<input type="text" name="dtCreateTime" /><br>
 		<input type="submit" value="提交" />
 	</form>
 </body>

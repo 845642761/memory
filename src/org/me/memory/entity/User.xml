@@ -75,7 +75,7 @@
 			<if test="strLoginId != null">
 				strLoginId=#{strLoginId}
 			</if>
-			<if test="name!=null">
+			<if test="strName!=null">
 				strName like '%#{strName}%'
 			</if>
 			<if test="nSex!=null">

@@ -8,6 +8,8 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	main
+	<a href="/user/updateUserInfo.do">资料修改</a><br>
+	<a href="/bookType/addBookType.do">添加账单类型表</a><br>
+	<a href="/bookType/getByRange.do">查看账单类型表</a><br>
 </body>
 </html>

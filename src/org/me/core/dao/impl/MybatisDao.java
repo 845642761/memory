@@ -1,4 +1,5 @@
 package org.me.core.dao.impl;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -35,5 +36,11 @@ public class MybatisDao<T> implements IMybatisDao<T>{
 	@Override
 	public void saveUpdate(String id, T t) {
 		sqlSession.update(id, t);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<T> getByRange(String id, HashMap<Object, Object> hm) {
+		return (ArrayList<T>) sqlSession.selectList(id,hm);
 	}
 }

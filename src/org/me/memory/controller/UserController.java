@@ -152,13 +152,15 @@ public class UserController {
 				writer.write("密码错误！");
 				return;
 			}
+
+			HttpSession session=request.getSession(true);
+			session.setAttribute("user", loginUser);
 			
 			HashMap<Object, Object> hmo=new HashMap<Object, Object>();
 			hmo.put("strLoginId", strLoginId);
 			User user=userService.get("org.me.memory.entity.User.get", hmo);
-			
-			HttpSession session=request.getSession(true);
-			session.setAttribute("user", user);
+			if(user!=null)
+				session.setAttribute("user", user);
 			
 			if(!userService.userInfoIsExit(strLoginId)){
 				logger.debug("no user info!");
@@ -225,6 +227,8 @@ public class UserController {
 		userService.save("org.me.memory.entity.User.save", user);
 		mav.setViewName("/system/main.do");
 		session.removeAttribute("isExitUserInfo");
+		session.setAttribute("user", user);
+		logger.debug("saveUserInfo successful!");
 		return mav;
 	}
 	

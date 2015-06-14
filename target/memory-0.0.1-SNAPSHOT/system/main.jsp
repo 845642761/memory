@@ -8,6 +8,6 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	main
+	<a href="/user/updateUserInfo.do">资料修改</a>
 </body>
 </html>

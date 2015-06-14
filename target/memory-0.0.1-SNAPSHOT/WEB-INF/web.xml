@@ -10,8 +10,8 @@
 
 	<!-- log4j -->
 	<context-param>
-		<param-name>Log4jConfigListener</param-name>
-		<param-value>classpath:org/me/config/log4j.properties</param-value>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/org/me/config/log4j.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
@@ -45,7 +45,7 @@
 	<!-- 登录验证拦截器 -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>org.me.memory.util.LoginFilter</filter-class>
+		<filter-class>org.me.memory.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
