@@ -9,6 +9,16 @@
 		values(#{strLoginId},#{strName})
 	</insert>
 	
+	<!-- 更新  -->
+	<update id="update" parameterType="BookType">
+		update mem_bookType set strName=#{strName} where nId=#{nId}
+	</update>
+	
+	<!-- get -->
+	<select id="get" parameterType="HashMap" resultType="BookType">
+		select * from mem_bookType where nId=#{nId}
+	</select>
+	
 	<!-- 根据条件查询 -->
 	<select id="getByRange" parameterType="HashMap" resultType="java.util.HashMap">
 		select * from mem_bookType

@@ -2,11 +2,8 @@ package org.me.memory.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 import org.me.memory.entity.BookType;
 import org.me.memory.entity.User;
@@ -64,8 +61,54 @@ public class BookTypeController {
 			hm.put("strName", strName);
 		ArrayList<BookType> btList=bookTypeService.getByRange("org.me.memory.entity.BookType.getByRange", hm);
 		mav.addObject("btList",btList);
-		request.setAttribute("btList", btList);
 		logger.debug("bookType getByRange successful!");
+		return mav;
+	}
+	
+	/**
+	 * 修改用户信息页面跳转
+	 * @author cheng_bo
+	 * @date 2015年6月14日 23:09:16
+	 */
+	@RequestMapping("/updateInfo")
+	public ModelAndView updateInfo(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("forward:/bookType/getByRange.do");
+		String nId=request.getParameter("nId");
+		if(!StringUtils.hasText(nId)){
+			logger.info("BookType strLoginId is null!");
+			mav.addObject("error", "请选择账单类型修改！");
+			return mav;
+		}
+		HashMap<Object, Object> hm=new HashMap<Object, Object>();
+		hm.put("nId", nId);
+		BookType bk=bookTypeService.get("org.me.memory.entity.BookType.get", hm);
+		if(bk==null){
+			logger.info("BookType not exit!");
+			mav.addObject("error", "账单类型不存在！");
+			return mav;
+		}
+		mav.addObject("BookType", bk);
+		mav.setViewName("forward:/bookType/updateInfo.jsp");
+		logger.debug("BookType get successful!");
+		return mav;
+	}
+	
+	/**
+	 * 保存修改信息
+	 * @author cheng_bo
+	 * @date 2015年6月14日 22:57:29
+	 */
+	@RequestMapping("/saveUpdate")
+	public ModelAndView saveUpdate(BookType bt) {
+		ModelAndView mav=new ModelAndView("forward:/bookType/getByRange.do");
+		if(bt==null){
+			logger.info("BookType is null");
+			mav.addObject("error","请选择账单类型修改！");
+			return mav;
+		}
+		bookTypeService.saveUpdate("org.me.memory.entity.BookType.update", bt);
+		mav.setViewName("forward:/bookType/updateInfo.do?nId="+bt.getnId());
+		logger.debug("BookType saveUpdate successful!");
 		return mav;
 	}
 }

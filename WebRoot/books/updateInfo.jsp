@@ -8,10 +8,10 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<a href="/user/updateUserInfo.do">资料修改</a><br>
-	<a href="/bookType/addBookType.do">添加账单类型</a><br>
-	<a href="/bookType/getByRange.do">查看账单类型</a><br>
-	<a href="/books/addBook.do">添加账单</a><br>
-	<a href="/books/getByRange.do">查看账单</a><br>
+	<form action="/bookType/saveUpdate.do" method="post">
+		<input type="hidden" name="nId" value="${BookType.nId}"/>
+		名称:<input type="text" name="strName" value="${BookType.strName}"/><br>
+		<input type="submit" value="提交" />
+	</form>
 </body>
 </html>
