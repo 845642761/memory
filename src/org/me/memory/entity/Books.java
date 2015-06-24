@@ -3,8 +3,6 @@ package org.me.memory.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 /**
  * 账单
  * @author cheng_bo
@@ -19,7 +17,6 @@ public class Books implements Serializable{
 	private float fMoney;
 	private String strNote;
 	private String strAddress;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date dtTime;
 
 	public Books() {

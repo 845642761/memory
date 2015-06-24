@@ -8,6 +8,10 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<a href="/user/updateUserInfo.do">资料修改</a>
+	<a href="/user/updateUserInfo.do">资料修改</a><br>
+	<a href="/bookType/addBookType.do">添加账单类型</a><br>
+	<a href="/bookType/getByRange.do">查看账单类型</a><br>
+	<a href="/books/addBook.do">添加账单</a><br>
+	<a href="/books/getByRange.do">查看账单</a><br>
 </body>
 </html>

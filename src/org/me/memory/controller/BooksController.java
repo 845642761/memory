@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
+import org.me.core.controller.BaseController;
 import org.me.memory.entity.BookType;
 import org.me.memory.entity.Books;
 import org.me.memory.entity.User;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/books")
-public class BooksController {
+public class BooksController extends BaseController{
 	private Logger logger = Logger.getLogger(BooksController.class);
 	
 	@Resource

@@ -8,7 +8,7 @@
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<form action="/user/saveUpdateUserInfo.do">
+	<form action="/user/saveUpdateUserInfo.do" method="post">
 		姓名:<input type="text" name="strName" value="${userInfo.strName}"/><br>
 		性别:<select name="nSex">
 			<option value="0">请选择</option>

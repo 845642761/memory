@@ -9,6 +9,7 @@
 </head>
 <body>
 	<form action="/user/saveUserInfo.do" method="post">
+		<input type="hidden" name="strLoginId" value="${user.strLoginId}"/>
 		姓名:<input type="text" name="strName" /><br>
 		性别:<select name="nSex">
 			<option value="0">请选择</option>

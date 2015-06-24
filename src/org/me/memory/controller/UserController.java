@@ -153,7 +153,7 @@ public class UserController {
 				return;
 			}
 
-			HttpSession session=request.getSession(true);
+			HttpSession session=request.getSession();
 			session.setAttribute("user", loginUser);
 			
 			HashMap<Object, Object> hmo=new HashMap<Object, Object>();
@@ -196,7 +196,7 @@ public class UserController {
 	@RequestMapping("/saveUserInfo")
 	public ModelAndView saveUserInfo(HttpServletRequest request) {
 		HttpSession session=request.getSession(false);
-		ModelAndView mav=new ModelAndView("addUserInfo.do");
+		ModelAndView mav=new ModelAndView("/user/addUserInfo.do");
 		String strLoginId=request.getParameter("strLoginId");
 		if(StringUtils.isEmpty(strLoginId)){
 			mav.addObject("error", "strLoginId is null!");

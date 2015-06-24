@@ -37,7 +37,6 @@ public class DateUtils {
 			return sdf.parse(strDate);
 		} catch (ParseException e) {
 			logger.error("DateUtils.forMatDate error:"+e.getMessage());
-			System.out.println(e.getMessage());
 			return null;
 		}
 	}

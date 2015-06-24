@@ -22,7 +22,7 @@
 	</listener>
 
 	<!-- 启动时调用 -->
-	<!-- <listener>
+<!-- 	<listener>
 		<listener-class>org.me.core.util.Init</listener-class>
 	</listener> -->
 

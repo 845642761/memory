@@ -26,6 +26,12 @@
 		<listener-class>org.me.core.util.Init</listener-class>
 	</listener> -->
 
+	<!-- 指定Spring Bean的配置文件所在目录。默认配置在WEB-INF目录下 -->
+	<context-param> 
+		<param-name>contextConfigLocation</param-name> 
+		<param-value>classpath:org/me/config/spring-context.xml</param-value>
+	</context-param>
+
 	<!-- spring mvc -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -33,7 +39,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:org/me/config/application-context.xml
+				classpath:org/me/config/springmvc-servlet.xml
 			</param-value>
 		</init-param>
 	</servlet>
@@ -41,6 +47,11 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Spring配置 -->
+	<listener> 
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+	</listener>
 
 	<!-- 登录验证拦截器 -->
 	<filter>
