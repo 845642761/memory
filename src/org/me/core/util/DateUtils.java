@@ -30,7 +30,7 @@ public class DateUtils {
 	 */
 	public Date forMatDate(String strDate) {
 		if(StringUtils.isEmpty(strDate)){
-			logger.error("strDate is null");
+			logger.error("strDate is null!");
 			return null;
 		}
 		try {

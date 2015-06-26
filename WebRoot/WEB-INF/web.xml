@@ -56,7 +56,7 @@
 	<!-- 登录验证拦截器 -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>org.me.memory.filter.LoginFilter</filter-class>
+		<filter-class>org.me.core.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
