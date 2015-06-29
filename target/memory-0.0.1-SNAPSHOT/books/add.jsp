@@ -13,11 +13,10 @@
 		<c:forEach var="items" items="${BookTypes}" varStatus="index">
 			${index.count}:${items.strName}<input name="nTypeId" type="radio" value="${items.nId}" /><br>	
 		</c:forEach>		
-		
-		现金：<input type="range" name="fMoney" /><br>
+		现金：<input type="text" name="fMoney" /><br>
 		备注：<input type="text" name="strNote" /><br>
 		地址：<input type="text" name="strAddress" /><br>
-		时间：<input type="text" name="dtTime" /><br>
+		时间：<input type="datetime" name="dtTime" /><br>
 		<input type="submit" value="提交" />
 	</form>
 </body>

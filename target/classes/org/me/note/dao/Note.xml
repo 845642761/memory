@@ -6,8 +6,8 @@
 <mapper namespace="org.me.note.dao.INoteDao">
 
 	<insert id="save" parameterType="Note">
-		insert into mem_note(strId,strTitle,strLoginId,tNote,nState,dtTime)
-		values(#{strId},#{strTitle},#{strLoginId},#{tNote},#{nState},now())
+		insert into mem_note(strId,strTitle,strLoginId,strLoginName,tNote,nState,dtTime)
+		values(#{strId},#{strTitle},#{strLoginId},#{strLoginName},#{tNote},#{nState},now())
 	</insert>
 	
 	<!-- get -->
@@ -17,27 +17,28 @@
 	
 	<!-- 根据条件查询 -->
 	<select id="getByRange" parameterType="HashMap" resultType="java.util.HashMap">
-		select * from mem_note
-		<where>
-			<if test="strId != null">
-				strId=#{strId}
-			</if>
-			<if test="strTitle != null">
-				strTitle like '%#{strTitle}%'
-			</if>
-			<if test="strLoginId != null">
-				strLoginId=#{strLoginId}
-			</if>
-			<if test="nState!=null">
-				nState=#{nState}
-			</if>
-			<if test="dtTimeMin!=null">
-				dtTime &gt; #{dtTimeMin}
-			</if>
-			<if test="dtTimeMax!=null">
-				dtTime &lt; #{dtTimeMax}
-			</if>
-		</where>
+		select * from mem_note where 1=1
+		<if test="strId != null">
+			and strId=#{strId}
+		</if>
+		<if test="strTitle != null">
+			and strTitle like CONCAT('%',#{strTitle},'%')
+		</if>
+		<if test="strLoginId != null">
+			and strLoginId=#{strLoginId}
+		</if>
+		<if test="strLoginName != null">
+			and strLoginName like CONCAT('%',#{strLoginName},'%')
+		</if>
+		<if test="nState!=null">
+			and nState=#{nState}
+		</if>
+		<if test="dtTimeMin!=null">
+			and dtTime &gt; #{dtTimeMin}
+		</if>
+		<if test="dtTimeMax!=null">
+			and dtTime &lt; #{dtTimeMax}
+		</if>
 		<choose>
 			<when test="order!=null">
 				order by #{order}
@@ -46,5 +47,34 @@
 				order by dtTime desc
 			</otherwise>
 		</choose>
+		<if test="start != null and limit!=null">
+			limit #{start},#{limit}
+		</if>
+	</select>
+	
+	<!-- 根据条件查询数量 -->
+	<select id="getByRangeSize" parameterType="HashMap" resultType="int">
+		select count(1) from mem_note where 1=1
+		<if test="strId != null">
+			and strId=#{strId}
+		</if>
+		<if test="strTitle != null">
+			and strTitle like CONCAT('%',#{strTitle},'%')
+		</if>
+		<if test="strLoginId != null">
+			and strLoginId=#{strLoginId}
+		</if>
+		<if test="strLoginName != null">
+			and strLoginName like CONCAT('%',#{strLoginName},'%')
+		</if>
+		<if test="nState!=null">
+			and nState=#{nState}
+		</if>
+		<if test="dtTimeMin!=null">
+			and dtTime &gt; #{dtTimeMin}
+		</if>
+		<if test="dtTimeMax!=null">
+			and dtTime &lt; #{dtTimeMax}
+		</if>
 	</select>
 </mapper>

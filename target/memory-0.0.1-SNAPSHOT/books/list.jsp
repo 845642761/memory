@@ -13,7 +13,7 @@
 		
 	</form>
 	
-	<table>
+	<table border="1" style="width: 100%;" cellpadding="2" cellspacing="0">
 		<tr>
 			<td>序号</td>
 			<td>现金</td>
@@ -32,6 +32,10 @@
 				<td><a href="">修改</a></td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td>总计</td>
+			<td colspan="5">${total}</td>
+		</tr>
 	</table>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.me.note.dao.INoteBackDao">
+
+	<insert id="save" parameterType="NoteBack">
+		insert into mem_noteBack(strId,tNote,nState,dtTime)
+		values(#{strId},#{tNote},#{nState},now())
+	</insert>
+	
+	<!-- get -->
+	<select id="get" parameterType="HashMap" resultType="NoteBack">
+		select * from mem_noteBack where nId=#{nId}
+	</select>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByRange" parameterType="HashMap" resultType="java.util.HashMap">
+		select * from mem_noteBack
+		<where>
+			<if test="nId != null">
+				nId=#{nId}
+			</if>
+			<if test="strId != null">
+				strId=#{strId}
+			</if>
+			<if test="nState!=null">
+				nState=#{nState}
+			</if>
+			<if test="dtTimeMin!=null">
+				dtTime &gt; #{dtTimeMin}
+			</if>
+			<if test="dtTimeMax!=null">
+				dtTime &lt; #{dtTimeMax}
+			</if>
+		</where>
+		<choose>
+			<when test="order!=null">
+				order by #{order}
+			</when>
+			<otherwise>
+				order by dtTime desc
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

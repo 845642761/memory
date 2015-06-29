@@ -10,7 +10,7 @@ import org.me.note.entity.NoteBack;
  * @date 2015年6月25日 16:39:41
  */
 public interface INoteBackDao {
-	public int save(NoteBack nb);		//保存
-	public NoteBack get(HashMap<Object, Object> hm);		//获取
-	public ArrayList<NoteBack> getByRange(HashMap<Object, Object> hm);		//条件查询
+	public int save(NoteBack nb);//保存
+	public NoteBack get(HashMap<Object, Object> hm);//获取
+	public ArrayList<NoteBack> getByRange(HashMap<Object, Object> hm);//条件查询
 }

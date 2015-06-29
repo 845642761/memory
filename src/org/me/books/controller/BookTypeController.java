@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.me.books.entity.BookType;
 import org.me.books.service.IBookTypeService;
-import org.me.books.util.UserUtils;
+import org.me.core.util.UserUtils;
 import org.me.user.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;

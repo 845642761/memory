@@ -11,9 +11,10 @@ import java.util.Date;
 public class Note implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String strId;		//id
+	private String strId;		//id(查询码)
 	private String strTitle;	//标题
 	private String strLoginId;	//发起人
+	private String strLoginName;//发起人名称
 	private String tNote;		//内容
 	private Date dtTime;		//发起时间
 	private int nState;			//状态,0-待审核,1-正常,2-禁用
@@ -59,6 +60,14 @@ public class Note implements Serializable {
 
 	public void setStrLoginId(String strLoginId) {
 		this.strLoginId = strLoginId;
+	}
+
+	public String getStrLoginName() {
+		return strLoginName;
+	}
+
+	public void setStrLoginName(String strLoginName) {
+		this.strLoginName = strLoginName;
 	}
 
 	public Date getDtTime() {

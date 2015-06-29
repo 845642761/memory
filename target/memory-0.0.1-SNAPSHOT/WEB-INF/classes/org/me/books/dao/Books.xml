@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.me.books.dao.IBooksDao">
+	<insert id="save" parameterType="Books">
+		insert into mem_books(strLoginId,nTypeId,fMoney,strNote,strAddress,dtTime)
+		values(#{strLoginId},#{nTypeId},#{fMoney},#{strNote},#{strAddress},#{dtTime})
+	</insert>
+	
+	<!-- 更新  -->
+	<update id="saveUpdate" parameterType="Books">
+		update mem_books
+		<set>
+			<if test="nTypeId!=null">
+				nTypeId=#{nTypeId},
+			</if>
+			<if test="fMoney!=null">
+				fMoney=#{fMoney},
+			</if>
+			<if test="strNote!=null">
+				strNote=#{strNote},
+			</if>
+			<if test="strAddress!=null">
+				strAddress=#{strAddress},
+			</if>
+			<if test="dtTime!=null">
+				dtTime=#{dtTime}
+			</if>
+		</set>
+	</update>
+	
+	<!-- get -->
+	<select id="get" parameterType="HashMap" resultType="Books">
+		select * from mem_books where nId=#{nId}
+	</select>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByRange" parameterType="HashMap" resultType="java.util.HashMap">
+		select * from mem_books
+		<where>
+			<if test="strLoginId != null">
+				strLoginId=#{strLoginId}
+			</if>
+			<if test="nTypeId!=null">
+				nTypeId=#{nTypeId}
+			</if>
+			<if test="dtTimeMin!=null">
+				dtTime &gt; #{dtTimeMin}
+			</if>
+			<if test="dtTimeMax!=null">
+				dtTime &lt; #{dtTimeMax}
+			</if>
+		</where>
+	</select>
+</mapper>

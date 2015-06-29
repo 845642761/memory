@@ -3,9 +3,10 @@ USE memory;
 -- 创建留言簿表
 DROP TABLE IF EXISTS `mem_note`;
 CREATE TABLE `mem_note`(
-	strId							VARCHAR(32)		NOT NULL,								-- id（UUID）
+	strId							VARCHAR(32)		NOT NULL,								-- id（UUID）(查询码)
 	strTitle						VARCHAR(32),											-- 标题
 	strLoginId						VARCHAR(32),											-- 发起人
+	strLoginName					VARCHAR(32),											-- 发起人名称
 	tNote							text,													-- 内容
 	dtTime							DATETIME,												-- 发起时间
 	nState							TINYINT			NOT NULL DEFAULT 0,						-- 状态,0-待审核,1-正常,2-禁用

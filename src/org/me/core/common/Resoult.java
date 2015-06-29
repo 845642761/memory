@@ -16,6 +16,7 @@ public class Resoult implements Serializable{
 	private int code=0;	//状态   0:正常   1:error
 	private String name;	//名称
 	private ArrayList<?> list;	//结果集
+	private Object object;
 	private int size=0;	//大小
 	private String info;	//说明信息
 	
@@ -49,5 +50,10 @@ public class Resoult implements Serializable{
 	public void setInfo(String info) {
 		this.info = info;
 	}
-	
+	public Object getObject() {
+		return object;
+	}
+	public void setObject(Object object) {
+		this.object = object;
+	}
 }

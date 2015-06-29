@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.me.user.dao.ILoginUserDao">
+	<insert id="save" parameterType="LoginUser">
+		insert into mem_loginUser(strLoginId,strPassword,nState)
+			values(#{strLoginId},#{strPassword},#{nState})
+	</insert>
+	
+	<select id="selectSize" parameterType="HashMap" resultType="int">
+		select count(1) from mem_loginUser
+		<where>
+			<if test="strLoginId !=null">
+				strLoginId=#{strLoginId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 登录 -->
+	<select id="get" parameterType="HashMap" resultType="LoginUser">
+		select * from mem_loginUser where strLoginId=#{strLoginId} and strPassword=#{strPassword}
+		<if test="nState==null">
+			and nState!=2
+		</if>
+	</select>
+</mapper>
