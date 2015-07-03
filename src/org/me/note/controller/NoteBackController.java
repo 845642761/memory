@@ -34,6 +34,7 @@ public class NoteBackController {
 	public ModelAndView list(NoteBack nb) {
 		ModelAndView mav=new ModelAndView("forward:/noteBack/list.jsp");
 		Resoult resoult=new Resoult();
+		resoult.setName("NoteBackController.list");
 		HashMap<Object, Object> hm=new HashMap<Object, Object>();
 		if(StringUtils.hasText(nb.getStrId())){
 			hm.put("strId", nb.getStrId());
@@ -59,7 +60,8 @@ public class NoteBackController {
 	@ResponseBody
 	public Resoult save(NoteBack nb,HttpServletRequest request) {
 		Resoult resoult=new Resoult();
-		if(!StringUtils.hasText(nb.getStrId())){
+		resoult.setName("NoteBackController.save");
+		if(nb==null || !StringUtils.hasText(nb.getStrId())){
 			logger.info("请选择留言回复！");
 			resoult.setCode(-1);
 			resoult.setInfo("请选择留言回复！");

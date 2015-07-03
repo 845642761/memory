@@ -27,6 +27,12 @@ public class NoteService implements INoteService {
 	public Resoult save(Note note) {
 		Resoult resoult=new Resoult();
 		resoult.setName("NoteService.save");
+		if(note==null){
+			logger.info("NoteService is null!");
+			resoult.setCode(-1);
+			resoult.setInfo("请选择信息保存！");
+			return resoult;
+		}
 		try {
 			noteDao.save(note);
 		} catch (Exception e) {
@@ -42,6 +48,12 @@ public class NoteService implements INoteService {
 	public Resoult get(HashMap<Object, Object> hm) {
 		Resoult resoult=new Resoult();
 		resoult.setName("NoteService.get");
+		if(hm==null || !hm.containsKey("strId")){
+			logger.error("NoteService.get error:id is null!");
+			resoult.setCode(-1);
+			resoult.setInfo("请选择信息查看！");
+			return resoult;
+		}
 		try {
 			Note note=noteDao.get(hm);
 			resoult.setObject(note);

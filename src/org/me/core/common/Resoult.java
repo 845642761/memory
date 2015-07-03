@@ -13,7 +13,7 @@ public class Resoult implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int code=0;	//状态   0:正常   1:error
+	private int code=0;	//状态   0:正常  -1:error
 	private String name;	//名称
 	private ArrayList<?> list;	//结果集
 	private Object object;

@@ -28,7 +28,7 @@
     			<value>classpath:org/me/books/dao/*.xml</value>
     			<value>classpath:org/me/user/dao/*.xml</value>
     			<value>classpath:org/me/note/dao/*.xml</value>
-    			<!-- <value>classpath:org/me/system/dao/*.xml</value> -->
+    			<value>classpath:org/me/system/dao/*.xml</value>
     		</list>
     	</property> 
 	</bean>

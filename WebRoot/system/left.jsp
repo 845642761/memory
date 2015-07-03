@@ -18,5 +18,6 @@
 	<a href="/books/getByRange.do" target="right">查看账单</a><br>
 	<a href="/note/add.do" target="right">添加留言</a><br>
 	<a href="/note/list.do" target="right">留言簿</a><br>
+	<a href="/system/menu/edit.do?strId=5798522710cc46188e9d1ab8e8b1fc83" target="right">添加菜单</a><br>
 </body>
 </html>

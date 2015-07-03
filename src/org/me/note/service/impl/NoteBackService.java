@@ -2,16 +2,13 @@ package org.me.note.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.me.core.common.Resoult;
 import org.me.note.dao.INoteBackDao;
 import org.me.note.entity.NoteBack;
 import org.me.note.service.INoteBackService;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 /**
  * NoteBackService
@@ -30,10 +27,10 @@ public class NoteBackService implements INoteBackService {
 	public Resoult save(NoteBack nb) {
 		Resoult resoult=new Resoult();
 		resoult.setName("NoteBackService.save");
-		if(!StringUtils.hasText(nb.getStrId())){
-			logger.info("NoteBack.StrId is null!");
+		if(nb==null){
+			logger.info("NoteBack is null!");
 			resoult.setCode(-1);
-			resoult.setInfo("选择留言查看！");
+			resoult.setInfo("请选择信息保存！");
 			return resoult;
 		}
 		try {
@@ -50,6 +47,12 @@ public class NoteBackService implements INoteBackService {
 	public Resoult get(HashMap<Object, Object> hm) {
 		Resoult resoult=new Resoult();
 		resoult.setName("NoteBackService.get");
+		if(hm!=null && hm.containsKey("strId")){
+			logger.info("NoteBack.StrId is null!");
+			resoult.setCode(-1);
+			resoult.setInfo("选择信息查看！");
+			return resoult;
+		}
 		try {
 			NoteBack nb=noteBackDao.get(hm);
 			resoult.setObject(nb);
@@ -65,11 +68,6 @@ public class NoteBackService implements INoteBackService {
 	public Resoult getByRange(HashMap<Object, Object> hm) {
 		Resoult resoult=new Resoult();
 		resoult.setName("NoteBackService.getByRange");
-		if(!StringUtils.hasText(hm.get("strId").toString())){
-			resoult.setCode(-1);
-			resoult.setInfo("请选择留言查看！");
-			return resoult;
-		}
 		try {
 			ArrayList<NoteBack> nbList=noteBackDao.getByRange(hm);
 			resoult.setList(nbList);
