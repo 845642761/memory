@@ -1,0 +1,35 @@
+input[type=text],input[type=password] {
+    border: 1px solid #cccccc;
+    height: 30px;
+    padding: 2px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    width: 150px;
+}
+
+label {
+    height: 30px;
+    margin-bottom: 0;
+    padding: 4px 5px 0;
+    text-align: right;
+}
+
+label.required:after {
+    content: ' *';
+    color: red;
+    vertical-align: sub;
+}
+
+select {
+    width: 150px;
+    height: 30px;
+}
+
+.btn {
+    border: none;
+    color: #FFFFFF;
+    padding: 4px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background: #00a4a5;
+}

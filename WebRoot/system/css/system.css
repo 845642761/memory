@@ -1,0 +1,30 @@
+/** 头部    **/
+.top{ width:100%; height:80px; background-color:#00a4a5; border-bottom: 3px solid #fee66a; float: left;}
+	.top_left{ width:300px; height:100%; float:left;}
+	.top_right{ width:300px; height:100%; float:right;}
+
+/** 标签   **/
+.nav{ width:100%; height:46px; background: #FFFFFF url(../images/navbg.gif) left bottom repeat-x; float: left;}
+
+#main:before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  top: 0;
+  bottom: 0;
+  background: #E4E4E4;
+  z-index: -1;
+}
+
+/** main **/
+.main{ width: 100%; float: left; top:0px; bottom: 0px;}
+	
+	/** 左边    **/
+	.main_left{ width: 200px; height:100%;}
+		.left_a{ width: 100%; float: left; height: 38px; line-height: 38px; border-bottom:1px #ffffff solid; text-align: center;}
+	
+	/** 右边   **/
+	.main_right{ height:100%; margin-left:200px;}
+
+/** 尾部    **/
+.bottom{ width:100%; height:25px; position:absolute; bottom:0px; left:0px; background-color:#00a4a5; padding:5px 0; float: left;}

@@ -17,31 +17,7 @@ public class SystemController {
 	
 	@RequestMapping("/main")
 	public ModelAndView main (HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/system/main.html");
-		return mav;
-	}
-	
-	@RequestMapping("/top")
-	public ModelAndView top(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/system/top.html");
-		return mav;
-	}
-	
-	@RequestMapping("/footer")
-	public ModelAndView footer(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/system/footer.html");
-		return mav;
-	}
-	
-	@RequestMapping("/left")
-	public ModelAndView left (HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/system/left.jsp");
-		return mav;
-	}
-	
-	@RequestMapping("/right")
-	public ModelAndView right(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/system/right.jsp");
+		ModelAndView mav=new ModelAndView("/system/main.jsp");
 		return mav;
 	}
 }
