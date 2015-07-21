@@ -25,6 +25,11 @@ public class MenuController {
 	@Resource
 	private IMenuService menuService;
 	
+	/**
+	 * @description: 查询
+	 * @author: cheng_bo
+	 * @date: 2015年7月7日 11:56:47
+	 */
 	@RequestMapping("/list")
 	public void list() {
 		

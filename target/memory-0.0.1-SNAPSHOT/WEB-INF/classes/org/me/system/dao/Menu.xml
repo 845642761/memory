@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.me.system.dao.IMenuDao">
+
+	<insert id="save" parameterType="Menu">
+		insert into mem_menu(strId,strPid,strName,nLevel,strURL,dtCreateTime,dtUpdateTime)
+		values(#{strId},#{strPid},#{strName},#{nLevel},#{strURL},now(),now())
+	</insert>
+	
+	<!-- get -->
+	<select id="get" parameterType="String" resultType="Menu">
+		select * from mem_menu where strId=#{strId}
+	</select>
+	
+	<!-- 根据条件查询 -->
+	<select id="list" parameterType="Menu" resultType="Menu">
+		select * from mem_menu where 1=1
+		<if test="strId != null">
+			and strId=#{strId}
+		</if>
+		<if test="strPid != null">
+			and strPid=#{strPid}
+		</if>
+		<if test="strName != null">
+			and strName like CONCAT('%',#{strName},'%')
+		</if>
+		<if test="nLevel!=null">
+			and nLevel=#{nLevel}
+		</if>
+		<choose>
+			<when test="order!=null">
+				order by #{order}
+			</when>
+			<otherwise>
+				order by dtCreateTime desc
+			</otherwise>
+		</choose>
+		<if test="start != null and limit!=null">
+			limit #{start},#{limit}
+		</if>
+	</select>
+	
+	<!-- 根据条件查询数量 -->
+	<select id="listSize" parameterType="Menu" resultType="Menu">
+		select count(1) from mem_menu where 1=1
+		<if test="strId != null">
+			and strId=#{strId}
+		</if>
+		<if test="strPid != null">
+			and strPid=#{strPid}
+		</if>
+		<if test="strName != null">
+			and strName like CONCAT('%',#{strName},'%')
+		</if>
+		<if test="nLevel!=null">
+			and nLevel=#{nLevel}
+		</if>
+	</select>
+	
+	<!-- 更新  -->
+	<update id="update" parameterType="Menu">
+		update mem_menu
+		<set>
+			<if test="strPid != null">
+				strPid=#{strPid}
+			</if>
+			<if test="strName != null">
+				strName=#{strName}
+			</if>
+			<if test="nLevel!=null">
+				nLevel=#{nLevel}
+			</if>
+			<if test="strURL!=null">
+				strURL=#{strURL}
+			</if>
+			<if test="nStatus!=null">
+				nStatus=#{nStatus}
+			</if>
+			<if test="nHasChild!=null">
+				nHasChild=#{nHasChild}
+			</if>
+				dtUpdateTime=now()
+		</set>
+		where strId=#{strId}
+	</update>
+</mapper>

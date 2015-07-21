@@ -12,9 +12,9 @@
 	<div class="login_wrapper">
 		<div class="login_box">
 			<!-- 左边 -->
-			<form class="loginForm" id="form">
-				<input type="text" id="strLoginId" name="strLoginId" placeholder="请输入登录帐号" class="input" onblur="loginIdIsExit()" />
-				<span class="error" id="strLoginIdTip" msg="请输入有效的登录帐号"></span>
+			<form class="loginForm" id="form" action="/user/loginIdIsExit.do" method="post">
+				<input type="text" id="strLoginId" name="strLoginId" placeholder="请输入登录帐号" class="userName input" onblur="loginIdIsExit()" />
+				<span class="error" id="strLoginIdTip" for="strLoginId" msg="请输入有效的登录帐号"></span>
 				<input type="password" id="password" name="strPassword" placeholder="请输入密码" class="input" onblur="validation('password')"/>
 				<span class="error" id="passwordTip" msg="请输入6-16位密码，字母区分大小写"></span>
 				<label class="fl">
@@ -32,6 +32,6 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="/common/js/jquery-1.11.3.min.js"></script>
+<jsp:include page="/common/plug-in.html" />
 <script type="text/javascript" src="/user/js/regist.js"></script>
 </html>

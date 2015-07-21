@@ -7,35 +7,41 @@
 <title>memory系统</title>
 <meta charset="utf-8" />
 <link href="/common/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/common/css/formUI.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<form action="/books/getByRange.do" method="post">
 		
 	</form>
-	
-	<table border="1" style="width: 100%;" cellpadding="2" cellspacing="0">
-		<tr>
-			<td>序号</td>
-			<td>现金</td>
-			<td>地址</td>
-			<td>备注</td>
-			<td>时间</td>
-			<td>操作</td>
-		</tr>
-		<c:forEach var="items" items="${bsList}" varStatus="index">
+	<div class="table">
+		<table>
+			<thead>
 			<tr>
-				<td>${index.count}</td>
-				<td>${items.fMoney}</td>
-				<td>${items.strAddress}</td>
-				<td>${items.strNote}</td>
-				<td>${items.dtTime}</td>
-				<td><a href="">修改</a></td>
+				<th>序号</th>
+				<th>现金</th>
+				<th>地址</th>
+				<th>备注</th>
+				<th>时间</th>
+				<th>操作</th>
 			</tr>
-		</c:forEach>
-		<tr>
-			<td>总计</td>
-			<td colspan="5">${total}</td>
-		</tr>
-	</table>
+			</thead>
+			<tbody>
+			<c:forEach var="items" items="${bsList}" varStatus="index">
+				<tr>
+					<td>${index.count}</td>
+					<td>${items.fMoney}</td>
+					<td>${items.strAddress}</td>
+					<td>${items.strNote}</td>
+					<td>${items.dtTime}</td>
+					<td><a href="">修改</a></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			<tr>
+				<td>总计</td>
+				<td colspan="5">${total}</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

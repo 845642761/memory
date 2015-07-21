@@ -32,14 +32,14 @@ public class LoginFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) sResponse;
 		HttpSession session=request.getSession(false);
 		String url=request.getRequestURI();
-		if(url.contains("regist") || url.contains("login") || url.contains("ssoLogin")){
+		if(url.contains("regist") || url.contains("login") || url.contains("ssoLogin") || url.contains("/user/save")){
 			fc.doFilter(sRequest, sResponse);
 			return;
 		}
 		if(session ==null || session.getAttribute("user")==null){
 			logger.info("no user login!");
 			response.sendRedirect("/user/login.do");
-			return;
+			return; 
 		}
 		if(session.getAttribute("isExitUserInfo")!=null && !url.contains("UserInfo")){
 			logger.debug("no user info!");

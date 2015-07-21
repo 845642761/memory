@@ -1,0 +1,21 @@
+.ui-widget-header {
+	border: 1px solid #038586;
+	background: #00a4a5 repeat-x;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.ui-dialog-title{
+	color: #FFFFFF;
+}
+
+.ui-widget{
+	font-size: 16px;
+}
+
+.ui-widget-header{
+	font-weight: normal;
+}
+
+.ui-dialog{
+	padding: 0px;
+}

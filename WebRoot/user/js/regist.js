@@ -1,7 +1,9 @@
+$('#form').validate();
+
 /**
  * 验证参数
  */
-function validation(id){
+/*function validation(id){
 	if(id==null || id==''){
 		return false;
 	}
@@ -18,7 +20,7 @@ function validation(id){
 	errorTip.innerHTML=msg;
 	errorTip.style.display='none';
 	return true;
-}
+}*/
 
 /**
  * 用户帐号是否已存在
@@ -74,7 +76,6 @@ function ajaxSubmit(){
 				window.location.href='login.do';
 				return true;
 			}else{
-				alert(data);
 				return false;
 			}
 		},

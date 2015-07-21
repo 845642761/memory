@@ -4,6 +4,7 @@ import java.util.HashMap;
 import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.me.core.common.Resoult;
+import org.me.core.security.MD5;
 import org.me.user.dao.ILoginUserDao;
 import org.me.user.entity.LoginUser;
 import org.me.user.service.ILoginUserService;
@@ -21,6 +22,8 @@ public class LoginUserService implements ILoginUserService{
 		Resoult resoult=new Resoult();
 		resoult.setName("LoginUserService.save");
 		try {
+			MD5 md5=new MD5();
+			loginUser.setStrPassword(md5.toMd5(loginUser.getStrPassword()));
 			loginUserDao.save(loginUser);
 			resoult.setInfo("LoginUserService.save successful!");
 		} catch (Exception e) {
@@ -58,6 +61,8 @@ public class LoginUserService implements ILoginUserService{
 	 */
 	@Override
 	public LoginUser ssoLogin(HashMap<Object, Object> hm) {
+		MD5 md5=new MD5();
+		hm.put("strPassword", md5.toMd5(hm.get("strPassword")+""));
 		return loginUserDao.get(hm);
 	}
 
