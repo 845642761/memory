@@ -36,14 +36,13 @@ public class LoginFilter implements Filter {
 			fc.doFilter(sRequest, sResponse);
 			return;
 		}
-		if(session ==null || session.getAttribute("user")==null){
-			logger.info("no user login!");
+		if(session ==null || session.getAttribute("loginUser")==null){
 			response.sendRedirect("/user/login.do");
 			return; 
 		}
 		if(session.getAttribute("isExitUserInfo")!=null && !url.contains("UserInfo")){
 			logger.debug("no user info!");
-			response.sendRedirect("/user/addUserInfo.do");
+			response.sendRedirect("/user/editUserInfo.do");
 			return;
 		}
 		fc.doFilter(sRequest, sResponse);

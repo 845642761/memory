@@ -1,6 +1,5 @@
 package org.me.user.service.impl;
 
-import java.util.HashMap;
 import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.me.core.common.Resoult;
@@ -25,13 +24,14 @@ public class LoginUserService implements ILoginUserService{
 			MD5 md5=new MD5();
 			loginUser.setStrPassword(md5.toMd5(loginUser.getStrPassword()));
 			loginUserDao.save(loginUser);
-			resoult.setInfo("LoginUserService.save successful!");
 		} catch (Exception e) {
-			resoult.setCode(1);
-			resoult.setInfo(e.getMessage());
-			logger.error("LoginUserService.save Error:"+e.getMessage()+"---->cause:"+e.getCause());
+			e.printStackTrace();
+			resoult.setCode(-1);
+			resoult.setInfo("保存失败！");
+			logger.error("保存失败！");
 			return resoult;
 		}
+		resoult.setInfo("保存成功！");
 		logger.debug("LoginUserService.save successful!");
 		return resoult;
 	}
@@ -45,9 +45,9 @@ public class LoginUserService implements ILoginUserService{
 	 */
 	@Override
 	public boolean loginIdIsExit(String strLoginId) {
-		HashMap<Object, Object> hm=new HashMap<Object, Object>();
-		hm.put("strLoginId", strLoginId);
-		int size=loginUserDao.selectSize(hm);
+		LoginUser user=new LoginUser();
+		user.setStrLoginId(strLoginId);
+		int size=loginUserDao.selectSize(user);
 		if(size<=0)
 			return false;
 		else
@@ -60,10 +60,10 @@ public class LoginUserService implements ILoginUserService{
 	 * @date 2015年6月5日 16:55:38
 	 */
 	@Override
-	public LoginUser ssoLogin(HashMap<Object, Object> hm) {
+	public LoginUser ssoLogin(LoginUser user) {
 		MD5 md5=new MD5();
-		hm.put("strPassword", md5.toMd5(hm.get("strPassword")+""));
-		return loginUserDao.get(hm);
+		user.setStrPassword(md5.toMd5(user.getStrPassword()));
+		return loginUserDao.get(user);
 	}
 
 }

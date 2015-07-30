@@ -9,7 +9,7 @@
 		values(#{strLoginId},#{dtBirthday},#{strName},#{nSex},#{strMobile},#{strPhone},#{strEmail},#{strQQ},#{strWeChar},#{strProvinceCode},#{strProvinceName},#{strCityCode},#{strCityName},#{strHeadURL},#{strAddress},now(),now())
 	</insert>
 	
-	<select id="selectSize" parameterType="HashMap" resultType="int">
+	<select id="selectSize" parameterType="User" resultType="int">
 		select count(1) from mem_user
 		<where>
 			<if test="strLoginId !=null">
@@ -69,7 +69,7 @@
 	</update>
 	
 	<!-- 根据条件查询 -->
-	<select id="getByRange" parameterType="HashMap">
+	<select id="getByRange" parameterType="User">
 		select * from mem_user
 		<where>
 			<if test="strLoginId != null">
@@ -102,7 +102,7 @@
 		</where>
 	</select>
 	
-	<select id="get" parameterType="HashMap" resultType="User">
+	<select id="get" parameterType="User" resultType="User">
 		select * from mem_user where strLoginId=#{strLoginId}
 	</select>
 </mapper>

@@ -1,15 +1,12 @@
 package org.me.user.controller;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.util.HashMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.me.core.common.BaseController;
 import org.me.core.common.Resoult;
-import org.me.core.util.DateUtils;
 import org.me.core.util.UserUtils;
 import org.me.user.entity.LoginUser;
 import org.me.user.entity.User;
@@ -18,12 +15,17 @@ import org.me.user.service.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 用户Controller
+ * @author: cheng_bo
+ * @date: 2015年7月28日 17:58:57
+ */
 @Controller
 @RequestMapping("/user")
-public class UserController {
-	private Logger logger = Logger.getLogger(UserController.class);
+public class UserController extends BaseController {
 	@Resource
 	private IUserService userService;
 	@Resource
@@ -31,7 +33,7 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest request,HttpServletResponse response) {
-		return new ModelAndView("/user/login.html");
+		return new ModelAndView("/user/login.jsp");
 	}
 	
 	@RequestMapping("/regist")
@@ -45,46 +47,31 @@ public class UserController {
 	 * @date 2015年6月5日 21:38:30
 	 */
 	@RequestMapping("/save")
-	public void saveLoginUser(HttpServletRequest request,HttpServletResponse response){
-		response.setContentType("text/javascript;charset=UTF-8");
-		String strLoginId = request.getParameter("strLoginId");
-		String strPassword = request.getParameter("strPassword");
-		Writer writer;
-		try {
-			writer = response.getWriter();
-			if(StringUtils.isEmpty("strLoginId")){
-				logger.info("strLoginId is null!");
-				writer.write("请输入用户名！");
-				return;
-			}
-			if(StringUtils.isEmpty("strPassword")){
-				writer.write("请输入密码！");
-				return;
-			}
-
-			boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
-			if(loginIdIsExit){
-				logger.debug("loginUser is exit!");
-				writer.write("用户帐号已存在！");
-				return;			
-			}
-			
-			LoginUser loginUser=new LoginUser();
-			loginUser.setStrLoginId(strLoginId);
-			loginUser.setStrPassword(strPassword);
-			loginUser.setnState(0);
-			Resoult iLoginUserServiceResoult=loginUserService.save(loginUser);
-			if(iLoginUserServiceResoult.getCode()!=0){
-				writer.write("保存失败！");
-				return;
-			}
-			logger.debug("LoginUser.save ok!");
-			writer.write("ok");
-		} catch (IOException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return;
+	@ResponseBody
+	public Resoult saveLoginUser(LoginUser user){
+		String strLoginId = user.getStrLoginId();
+		String strPassword = user.getStrPassword();
+		Resoult resoult=new Resoult();
+		resoult.setName("UserController.saveLoginUser");
+		resoult.setCode(-1);
+		if(StringUtils.isEmpty(strLoginId)){
+			resoult.setInfo("请输入用户名！");
+			return resoult;
 		}
+		if(StringUtils.isEmpty(strPassword)){
+			resoult.setInfo("请输入密码！");
+			return resoult;
+		}
+		
+		boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
+		if(loginIdIsExit){
+			resoult.setInfo("用户帐号已存在！");
+			return resoult;
+		}
+
+		user.setnState(0);
+		resoult=loginUserService.save(user);
+		return resoult;
 	}
 	
 	/**
@@ -94,30 +81,27 @@ public class UserController {
 	 * @date:2015年5月26日 10:23:42
 	 */
 	@RequestMapping("/loginIdIsExit")
-	public void loginIdIsExit(HttpServletRequest request,HttpServletResponse response){
-		response.setContentType("text/javascript;charset=UTF-8");
-		String strLoginId=request.getParameter("strLoginId");
-		Writer writer=null;
-		try {
-			writer= response.getWriter();
-			if(!StringUtils.hasText(strLoginId))
-			{
-				logger.info("strLoginId is null!");
-				writer.write("请输入用户帐号！");
-				return;
-			}
-			boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
-			if(loginIdIsExit){
-				logger.debug("loginUser is exit!");
-				writer.write("用户帐号已存在！");
-				return;			
-			}
-			logger.debug("loginUser is not exit!");
-			writer.write("ok");
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			return;	
+	@ResponseBody
+	public Resoult loginIdIsExit(LoginUser user){
+		String strLoginId=user.getStrLoginId();
+		Resoult resoult=new Resoult();
+		resoult.setName("UserController.loginIdIsExit");
+		resoult.setCode(-1);
+		
+		if(!StringUtils.hasText(strLoginId))
+		{
+			resoult.setInfo("请输入用户帐号！");
+			return resoult;
 		}
+		
+		boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
+		if(loginIdIsExit){
+			resoult.setInfo("用户帐号已存在！");
+			return resoult;
+		}
+		resoult.setCode(0);
+		resoult.setInfo("帐号可以使用！");
+		return resoult;
 	}
 	
 	/**
@@ -126,71 +110,68 @@ public class UserController {
 	 * @date 2015年6月5日 17:00:42
 	 */
 	@RequestMapping("/ssoLogin")
-	public void ssoLogin(HttpServletRequest request,HttpServletResponse response){
-		String strLoginId = request.getParameter("strLoginId");
-		String strPassword = request.getParameter("strPassword");
-		Writer writer;
-		try {
-			writer = response.getWriter();
-			if(StringUtils.isEmpty("strLoginId")){
-				logger.info("strLoginId is null!");
-				writer.write("请输入用户名！");
-				return;
-			}
-			if(StringUtils.isEmpty("strPassword")){
-				writer.write("请输入密码！");
-				return;
-			}
-
-			boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
-			if(!loginIdIsExit){
-				logger.info("loginUser is not exit!");
-				writer.write("用户帐号不存在！");
-				return;			
-			}
-			HashMap<Object, Object> hm=new HashMap<Object, Object>();
-			hm.put("strLoginId", strLoginId);
-			hm.put("strPassword", strPassword);
-			LoginUser loginUser=loginUserService.ssoLogin(hm);
-			if(loginUser==null){
-				logger.info("密码错误！");
-				writer.write("密码错误！");
-				return;
-			}
-
-			HttpSession session=request.getSession();
-			session.setAttribute("user", loginUser);
-			
-			HashMap<Object, Object> hmo=new HashMap<Object, Object>();
-			hmo.put("strLoginId", strLoginId);
-			User user=userService.get(hmo);
-			if(user!=null)
-				session.setAttribute("user", user);
-			
-			if(!userService.userInfoIsExit(strLoginId)){
-				logger.debug("no user info!");
-				writer.write("addInfo");
-				session.setAttribute("isExitUserInfo", false);
-				return;
-			}
-			
-			logger.debug("LoginUser.login ok!");
-			writer.write("ok");
-		} catch (IOException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			return;
+	@ResponseBody
+	public Resoult ssoLogin(LoginUser lUser,HttpServletRequest request){
+		String strLoginId = lUser.getStrLoginId();
+		String strPassword = lUser.getStrPassword();
+		Resoult resoult=new Resoult();
+		resoult.setName("UserController.ssoLogin");
+		resoult.setCode(-1);
+		
+		if(StringUtils.isEmpty(strLoginId)){
+			resoult.setInfo("请输入用户名！");
+			return resoult;
 		}
+		
+		if(StringUtils.isEmpty(strPassword)){
+			resoult.setInfo("请输入密码！");
+			return resoult;
+		}
+		
+		boolean loginIdIsExit=this.loginUserService.loginIdIsExit(strLoginId);
+		if(!loginIdIsExit){
+			resoult.setInfo("用户帐号不存在！");
+			return resoult;
+		}
+		
+		LoginUser loginUser=loginUserService.ssoLogin(lUser);
+		if(loginUser==null){
+			resoult.setInfo("密码错误！");
+			return resoult;
+		}
+
+		HttpSession session=request.getSession();
+		session.setAttribute("loginUser", loginUser);
+		
+		User user=userService.get(strLoginId);
+		if(user!=null){
+			session.setAttribute("user", user);
+			resoult.setCode(0);
+		}else{
+			session.setAttribute("isExitUserInfo", false);
+			resoult.setCode(1);
+		}
+		return resoult;
 	}
 	
 	/**
-	 * 添加用户信息
+	 * 添加或修改用户信息
 	 * @author cheng_bo
 	 * @date 2015年6月8日 15:11:19
 	 */
-	@RequestMapping("/addUserInfo")
-	public String addUserInfo() {
-		return "user/addUserInfo.jsp";
+	@RequestMapping("/editUserInfo")
+	public ModelAndView editUserInfo(User user) {
+		ModelAndView mav=new ModelAndView("/user/editUserInfo.jsp");
+		if(StringUtils.hasText(user.getStrLoginId())){
+			User u=userService.get(user.getStrLoginId());
+			if(u==null){
+				mav.addObject("error", "暂无用户信息！");
+				return mav;
+			}
+			mav.addObject("user",u);
+			return mav;
+		}
+		return mav;
 	}
 	
 	/**
@@ -199,86 +180,56 @@ public class UserController {
 	 * @date 2015年6月8日 15:49:41
 	 */
 	@RequestMapping("/saveUserInfo")
-	public ModelAndView saveUserInfo(HttpServletRequest request) {
+	public ModelAndView saveUserInfo(HttpServletRequest request,User user) {
 		HttpSession session=request.getSession(false);
-		ModelAndView mav=new ModelAndView("/user/addUserInfo.do");
-		String strLoginId=request.getParameter("strLoginId");
-		if(StringUtils.isEmpty(strLoginId)){
-			mav.addObject("error", "strLoginId is null!");
-			logger.debug("strLoginId is null!");
+		ModelAndView mav=new ModelAndView();
+		String strLoginId=user.getStrLoginId();
+		Resoult resoult=null;
+		if(StringUtils.hasText(strLoginId)){
+			resoult=userService.saveUpdate(user);
+			mav.setViewName("/user/editUserInfo.do?strLoginId="+user.getStrLoginId());
+		}else {
+			LoginUser sessionUser=new UserUtils().getLoginUser(request);
+			if(userService.get(sessionUser.getStrLoginId()) != null){
+				user.setStrLoginId(sessionUser.getStrLoginId());
+				resoult=userService.saveUpdate(user);
+				mav.setViewName("/user/editUserInfo.do?strLoginId="+sessionUser.getStrLoginId());
+			}else {
+				user.setStrLoginId(sessionUser.getStrLoginId());
+				resoult=userService.save(user);
+				mav.setViewName("/system/main.do");
+			}
+		}
+		
+		if(resoult.getCode()!=0){
+			mav.addObject("error", resoult.getInfo());
 			return mav;
 		}
-		if(userService.userInfoIsExit(strLoginId)){
-			logger.debug("user info exit!");
-			mav.addObject("error", "user info exit!");
-			return mav;
-		}
-		User user=new User();
-		user.setStrLoginId(strLoginId);
-		user.setDtBirthday(new DateUtils().forMatDate(request.getParameter("dtBirthday")));
-		user.setStrName(request.getParameter("strName"));
-		user.setnSex(Integer.parseInt(request.getParameter("nSex")));
-		user.setStrMobile(request.getParameter("strMobile"));
-		user.setStrPhone(request.getParameter("strPhone"));
-		user.setStrEmail(request.getParameter("strEmail"));
-		user.setStrQQ(request.getParameter("strQQ"));
-		user.setStrWeChar(request.getParameter("strWeChar"));
-		user.setStrProvinceCode(request.getParameter("strProvinceCode"));
-		user.setStrProvinceName(request.getParameter("strProvinceName"));
-		user.setStrCityCode(request.getParameter("strCityCode"));
-		user.setStrCityName(request.getParameter("strCityName"));
-		user.setStrHeadURL(request.getParameter("strHeadURL"));
-		user.setStrAddress(request.getParameter("strAddress"));
-		userService.save(user);
-		mav.setViewName("/system/main.do");
 		session.removeAttribute("isExitUserInfo");
 		session.setAttribute("user", user);
-		logger.debug("saveUserInfo successful!");
-		return mav;
-	}
-	
-	@RequestMapping("/updateUserInfo")
-	public ModelAndView updateUserInfo(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("/user/updateUserInfo.jsp");
-		User loginUser=new UserUtils().getLoginUser(request);
-		if(loginUser==null){
-			logger.debug("no user login!");
-			mav.addObject("error", "请登录后修改！");
-			mav.setViewName("/user/login.do");
-			return mav;
-		}
-		String strLoginId=loginUser.getStrLoginId();
-		HashMap<Object, Object> hm=new HashMap<Object, Object>();
-		hm.put("strLoginId", strLoginId);
-		User u=userService.get(hm);
-		if(u==null){
-			logger.debug("no userInfo!");
-			mav.addObject("error", "暂无用户信息！");
-			mav.setViewName("user/addUserInfo.jsp");
-			return mav;
-		}
-		mav.addObject("userInfo", u);
 		return mav;
 	}
 	
 	/**
-	 * 保存修改后的用户信息
-	 * @author cheng_bo
-	 * @date 2015年6月10日 14:05:34
+	 * 修改自己信息
+	 * @author: cheng_bo
+	 * @date: 2015年7月28日 17:04:07
 	 */
-	@RequestMapping("/saveUpdateUserInfo")
-	public ModelAndView saveUpdateUserInfo(User u,HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView("redirect:/user/updateUserInfo.do");
-		User loginUser=new UserUtils().getLoginUser(request);
-		if(loginUser==null){
-			logger.debug("no user login!");
+	@RequestMapping("/updateMyInfo")
+	public ModelAndView updateMyInfo(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("/user/editUserInfo.jsp");
+		User user=new UserUtils().getUser(request);
+		if(user==null){
 			mav.addObject("error", "请登录后修改！");
 			mav.setViewName("/user/login.do");
 			return mav;
 		}
-		u.setStrLoginId(loginUser.getStrLoginId());
-		userService.saveUpdate(u);
-		logger.debug("saveUpdateUserInfo successful!");
+		User u=userService.get(user.getStrLoginId());
+		if(u==null){
+			mav.addObject("error", "暂无用户信息！");
+			return mav;
+		}
+		mav.addObject("userInfo", u);
 		return mav;
 	}
 }

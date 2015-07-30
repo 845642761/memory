@@ -9,7 +9,7 @@
 			values(#{strLoginId},#{strPassword},#{nState})
 	</insert>
 	
-	<select id="selectSize" parameterType="HashMap" resultType="int">
+	<select id="selectSize" parameterType="LoginUser" resultType="int">
 		select count(1) from mem_loginUser
 		<where>
 			<if test="strLoginId !=null">
@@ -19,7 +19,7 @@
 	</select>
 	
 	<!-- 登录 -->
-	<select id="get" parameterType="HashMap" resultType="LoginUser">
+	<select id="get" parameterType="LoginUser" resultType="LoginUser">
 		select * from mem_loginUser where strLoginId=#{strLoginId} and strPassword=#{strPassword}
 		<if test="nState==null">
 			and nState!=2

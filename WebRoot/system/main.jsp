@@ -5,8 +5,8 @@
 <head>
 <title>memory系统</title>
 <meta charset="utf-8" />
-<link href="/common/css/common.css" rel="stylesheet" type="text/css" />
-<link href="css/system.css" rel="stylesheet" type="text/css" />
+<link href="/common/css/formUI.css" rel="stylesheet" type="text/css" />
+<link href="/system/css/system.css" rel="stylesheet" type="text/css" />
 <link href="/common/js/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="/common/js/jquery-ui-1.11.4/jquery-ui.structure.min.css" rel="stylesheet" type="text/css" />
 <link href="/common/js/jquery-ui-1.11.4/myUI.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,6 @@
 <div class="main" id="main">
 	<!-- 左边 -->
 	<div class="main_left">
-		<a class="left_a" href="/user/updateUserInfo.do" target="iframe">资料修改</a>
 		<a class="left_a" href="/bookType/addBookType.do" target="iframe">添加账单类型</a>
 		<a class="left_a" href="/bookType/getByRange.do" target="iframe">查看账单类型</a>
 		<a class="left_a" href="/books/addBook.do" target="iframe">添加账单</a>
@@ -39,7 +38,7 @@
 	</div>
 	<!-- 右边 -->
 	<div class="main_right">
-		<iframe name="iframe" id="iframe" src="/user/updateUserInfo.do" marginWidth="0" marginHeight="0" frameBorder="0" width="100%" height="100%" scrolling="no" onload="setHeight()"></iframe>
+		<iframe name="iframe" id="iframe" src="/bookType/addBookType.do" marginWidth="0" marginHeight="0" frameBorder="0" width="100%" height="100%" scrolling="no" onload="setHeight()"></iframe>
 	</div>
 </div>
 
@@ -47,7 +46,7 @@
 <div class="bottom"></div>
 </body>
 <script type="text/javascript" src="/common/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/common/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<jsp:include page="/common/plug-jqueryUI.html" />
 <script type="text/javascript">
 	/**
 	 * @description: 初始化iframe高度
@@ -78,7 +77,7 @@
 	 * @author: cheng_bo
 	 * @date: 2015年7月6日 15:03:47
 	 */
-	var dialog = $('<div>').dialog({
+	/* var dialog = $('<div>').dialog({
 		width: 600,
 		autoOpen: false
 	});
@@ -87,6 +86,6 @@
 		dialog.html(res);
 		dialog.dialog('option', 'title', '信息修改');
 		dialog.dialog('open');
-	});
+	}); */
 </script>
 </html>

@@ -1,4 +1,3 @@
-$(function (){
 	/**
 	 * @Description: 重置默认提示信息
 	 * @author: cheng_bo
@@ -33,9 +32,24 @@ $(function (){
     };
     $.validator.addMethod("userName", userName, jQuery.validator.format("请输入有效的登录帐号！"));
     
+    var cellphone = function (value, element) {
+        return this.optional(element) || /^1[0-9]{10}$/.test(value);
+    };
+    $.validator.addMethod("cellphone", cellphone, jQuery.validator.format("请输入有效的手机号！"));
+    
+    /**
+	 * @Description: 验证错误显示方式
+	 * @author: cheng_bo
+	 * @date: 2015年7月24日 14:48:56
+	 */
     $.validator.setDefaults({
-        errorPlacement: function (error, element) {
-        },
-        errorClass: 'has-error'
-    });
-});
+	    errorPlacement: function (error, element) {
+	    	var msg=element.attr('msg');
+	    	if(msg != null){
+	    		element.attr('title',msg);
+	    	}else {
+	    		element.attr('title',error.text());
+			}
+	    },
+	 errorClass: 'has-error'   //自定义错误class
+	});

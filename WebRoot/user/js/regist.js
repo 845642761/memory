@@ -1,26 +1,39 @@
-$('#form').validate();
+var form=$('#form');
 
 /**
- * 验证参数
+ * 添加验证
  */
-/*function validation(id){
-	if(id==null || id==''){
-		return false;
+var validate=form.validate({
+	submitHandler:function(){
+		if(!$('#yhxy').is(':checked')){
+			alert("请同意用户协议！");
+			return false;
+		}
+		if(loginIdIsExit()){
+			$.ajax({
+				type : 'POST',
+				url :'/user/save.do',
+				data : form.serialize(),
+				success:function(data) { 
+					if(data.code==0){
+						alert('注册成功！');
+						window.location.href='login.do';
+						return true;
+					}else{
+						alert(data.info);
+						return false;
+					}
+				},
+				error : function() {    
+					alert("异常！");  
+					return false;
+				}    
+			});
+		}else{
+			return false;
+		}
 	}
-	var obj=document.getElementById(id);
-	var msg='';
-	var errorTip=document.getElementById(id+'Tip');
-	if(errorTip.hasAttribute('msg')){
-		msg=errorTip.getAttribute('msg');
-	}
-	if(obj.value==null || obj.value==''){
-		errorTip.style.display='block';
-		return false;
-	}
-	errorTip.innerHTML=msg;
-	errorTip.style.display='none';
-	return true;
-}*/
+});
 
 /**
  * 用户帐号是否已存在
@@ -28,60 +41,24 @@ $('#form').validate();
  * @date 2015年6月1日 11:04:29
  */
 function loginIdIsExit(){
-	if(!validation('strLoginId')){
-		return false;
-	}
-	var strLoginId=document.getElementById('strLoginId').value;
+	var strLoginId=$('.userName').val();
 	$.ajax({
 		type : 'POST',
 		url :'/user/loginIdIsExit.do',
-		dataType : 'html',
+		dataType : 'json',
 		data : 'strLoginId='+strLoginId,
-		success:function(data) { 
-			if(data!=null && data=='ok'){
+		success:function(data) {
+			if(data.code==0){
 				return true;
 			}else{
-				var errorTip=document.getElementById('strLoginIdTip');
-				errorTip.innerHTML=data;
-				errorTip.style.display='block';
+				userName.attr('class','has-error');
 				return false;
 			}
 		},
 		error : function() {    
-			alert("异常！");  
+			alert("异常！");
 			return false;
 		}    
 	});
-}
-
-/**
- * ajax提交
- * @author cheng_bo
- * @date 2015年6月4日 21:14:10
- */
-function ajaxSubmit(){
-	if(!validation('strLoginId')){
-		return false;
-	}
-	if(!validation('password')){
-		return false;
-	}
-	$.ajax({
-		type : 'POST',
-		url :'/user/save.do',
-		data : $('#form').serialize(),
-		success:function(data) { 
-			if(data!=null && data=='ok'){
-				alert('注册成功！');
-				window.location.href='login.do';
-				return true;
-			}else{
-				return false;
-			}
-		},
-		error : function() {    
-			alert("异常！");  
-			return false;
-		}    
-	});
+	return true;
 }

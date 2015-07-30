@@ -35,7 +35,7 @@ public class BookTypeController {
 	@RequestMapping("/save")
 	public ModelAndView save(BookType bt,HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView("/bookType/addBookType.do");
-		User user=new UserUtils().getLoginUser(request);
+		User user=new UserUtils().getUser(request);
 		if(user==null){
 			logger.debug("no user login!");
 			mav.addObject("error", "请登录后修改！");
@@ -50,7 +50,7 @@ public class BookTypeController {
 	@RequestMapping("/getByRange")
 	public ModelAndView getByRange(HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView("forward:/bookType/list.jsp");
-		User u=new UserUtils().getLoginUser(request);
+		User u=new UserUtils().getUser(request);
 		String strLoginId=u.getStrLoginId();
 		String strName=request.getParameter("strName");
 		HashMap<Object, Object> hm=new HashMap<Object, Object>();

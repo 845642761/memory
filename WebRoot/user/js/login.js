@@ -1,55 +1,32 @@
 /**
  * 登录
- * @author cheng_bo
- * @date 
+ * @author: cheng_bo
+ * @date: 2015年7月28日 14:20:07
  */
-function login(){
-	if(!validation('strLoginId')){
-		return;
-	}
-	if(!validation('password')){
-		return;
-	}
-	$.ajax({
-		type : 'POST',
-		url :'/user/ssoLogin.do',
-		data : $('#form').serialize(),
-		success:function(data) { 
-			if(data!=null){
-				if(data=='ok'){
-					window.location.href='/system/main.do';
-				}else if(data=='addInfo'){
-					window.location.href='/user/addUserInfo.do';
-				}else{
-					alert(data);
-				}
-			}
-		},
-		error : function() {    
-			alert("异常！");  
-			return;
-		}    
-	});
-}
+var form=$('#form');
 
 /**
-* 验证参数
-*/
-function validation(id){
-	if(id==null || id==''){
-		return false;
+ * 添加验证
+ */
+var validate=form.validate({
+	submitHandler:function(){
+		$.ajax({
+			type : 'POST',
+			url :'/user/ssoLogin.do',
+			data : form.serialize(),
+			success:function(data) { 
+				if(data.code==0){
+					window.location.href='/system/main.do';
+				}else if(data.code==1){
+					window.location.href='/user/editUserInfo.do';
+				}else{
+					alert(data.info);
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {    
+				alert("异常！");  
+				return;
+			}    
+		});
 	}
-	var obj=document.getElementById(id);
-	var msg='';
-	var errorTip=document.getElementById(id+'Tip');
-	if(errorTip.hasAttribute('msg')){
-		msg=errorTip.getAttribute('msg');
-	}
-	if(obj.value==null || obj.value==''){
-		errorTip.style.display='block';
-		return false;
-	}
-	errorTip.innerHTML=msg;
-	errorTip.style.display='none';
-	return true;
-}
+});

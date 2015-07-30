@@ -3,19 +3,33 @@
  * @author:cheng_bo
  * @date:2015年5月23日 23:35:28
  */
-label{ vertical-align:top; cursor: default;}
-input{ border: none; font-size: 16px;}
-input:focus{ cursor: auto; outline:#038586 Solid 1px;}
-.login_bg{ overflow: hidden; background-color: gray;}
-	.login_wrapper{ margin: 0 auto; width: 640px; padding-top: 140px; background-color:#00a4a5;}
+
+input{
+    padding: 6px 10px;
+}
+ 
+input[type=text],input[type=password]{ 
+ 	width: 296px;
+ 	height: 30px;
+ 	margin: 0 0 20px;
+}
+
+ input[type=submit]{
+    width: 150px;
+    height: 46px;
+    background: #038586;
+    border: none;
+    text-align: center;
+    color: #fff;
+}
+
+.login_bg{ background-color: #00a4a5;}
+	.login_wrapper{ width: 640px; position: absolute; top: 30%; right: 100px;}
 		.login_box{ min-height: 150px; background-color: #eafffd; padding: 35px; overflow: hidden;}
 			.loginForm{ width: 360px; border-right: 1px dashed #999; float: left;}
-				.input{ width: 296px; border: none; height: 30px; line-height: 30px; text-align: start; padding: 6px 10px; margin: 0 0 20px; letter-spacing: normal; word-spacing: normal;}
-				.fl{ float: left!important;}
-					.fl input{ margin-bottom: 20px;}	
-				.fr{ float: right!important; margin-right: 45px; color: #777; vertical-align: top;}	
-				.submit{ width: 155px; height: 46px; line-height: 46px; float: left; margin-top: 20px; background: #038586; border: none; text-align: center; color: #fff; padding: 2px 6px 3px; clear: both;}
+				.fl{ float: left;}
+					.fl input{ margin-bottom: 20px;}
+				.submit{ float: left; margin-top: 18px; clear: both;}
 			
 			.login_right{ float: left; margin: 10px 0 0 25px; line-height: 30px;}
-				.registor_now{ float: left; height: 30px; line-height: 30px; padding-right: 24px; color: #038586;}
-.error{ color: #ff6a6a; font-size: 14px; text-align: left; padding-left: 20px; line-height: 22px; margin: -10px 0 10px 0; display: block; display: none;}
+				.registor_now{ float: left; height: 30px; padding-right: 24px; color: #038586;}

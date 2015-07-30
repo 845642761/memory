@@ -77,7 +77,7 @@ public class NoteController {
 	public ModelAndView save(Note note,HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView("forward:/note/add.do");
 		note.setStrId(new Uuid().getUUID());
-		User user=new UserUtils().getLoginUser(request);
+		User user=new UserUtils().getUser(request);
 		note.setStrLoginName(user.getStrName());
 		Resoult resoult=noteService.save(note);
 		if(resoult.getCode()!=1){
