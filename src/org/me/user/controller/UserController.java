@@ -197,7 +197,7 @@ public class UserController extends BaseController {
 			}else {
 				user.setStrLoginId(sessionUser.getStrLoginId());
 				resoult=userService.save(user);
-				mav.setViewName("/system/main.do");
+				mav.setViewName("redirect:/system/main.do");
 			}
 		}
 		

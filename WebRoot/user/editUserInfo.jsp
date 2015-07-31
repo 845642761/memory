@@ -39,7 +39,7 @@
 					<td><label class="required">手机号:</label></td>
 					<td><input type="text" class="required cellphone" name="strMobile" /></td>
 					<td><label>紧急联系人:</label></td>
-					<td><input type="text" name="strPhone cellphone" class="cellphone" /></td>
+					<td><input type="text" name="strPhone" class="cellphone" /></td>
 				</tr>
 				<tr>
 					<td><label>QQ:</label></td>
@@ -72,7 +72,7 @@
 				<tr>
 					<td colspan="4" class="alignCenter">
 						<input type="submit" class="btn" value="提交" />
-						<input type="button" class="btn" value="重置" />
+						<input type="button" class="btn reset" value="重置" />
 					</td>
 				</tr>
 			</table>
