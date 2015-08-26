@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="org.me.security.dao.ISecurityDao">
+
+	<!-- 根据用户Id查找其角色 -->
+	<select id="getRoles" parameterType="String" resultType="UserRole">
+		select * from mem_userRole where strLoginId=#{strLoginId}
+	</select>
+	
+	<!-- 根据角色Id查找其权限-->
+	<select id="list" parameterType="String" resultType="Permission">
+		SELECT
+			p.*
+		FROM
+			mem_rolepermission rp
+		INNER JOIN mem_permission p 
+		ON 
+			rp.strPermissionId = p.strId
+		AND
+			rp.strRoleId =#{roleId}
+		<if test="nLevel >= 0">
+			and	p.nLevel=#{nLevel}
+		</if>
+		<if test="nType >= 0">
+			and	p.nType=#{nType}
+		</if>
+	</select>
+	
+	<!--根据条件查找其权限 -->
+	<select id="getPermissionsByRange" parameterType="Permission" resultType="Permission">
+		SELECT
+			*
+		FROM mem_permission p where 1=1
+		<if test="strName!=null and strName!=''">
+			 and p.strName like CONCAT('%',#{strName},'%')
+		</if>
+		<if test="strPId !=null and strPId != ''">
+			 and p.strPId=#{strPId}
+		</if>
+		<if test="nLevel >= 0">
+			 and p.nLevel=#{nLevel}
+		</if>
+		
+		<if test="nType >= 0">
+			 and p.nType=#{nType}
+		</if>
+		
+		<if test="strPermission !=null and strPermission!=''">
+			 and p.strPermission like CONCAT('%',#{strPermission},'%')
+		</if>
+		<if test="nState >= 0">
+			 and p.nState=#{nState}
+		</if>
+	</select>
+</mapper>

@@ -22,13 +22,14 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动配置别名 -->  
-    	<property name="typeAliasesPackage" value="org.me.books.entity,org.me.system.entity,org.me.user.entity,org.me.note.entity" />
+    	<property name="typeAliasesPackage" value="org.me.books.entity,org.me.system.entity,org.me.user.entity,org.me.note.entity,org.me.security.entity" />
     	<property name="mapperLocations">
     		<list>
     			<value>classpath:org/me/books/dao/*.xml</value>
     			<value>classpath:org/me/user/dao/*.xml</value>
     			<value>classpath:org/me/note/dao/*.xml</value>
     			<value>classpath:org/me/system/dao/*.xml</value>
+    			<value>classpath:org/me/security/dao/*.xml</value>
     		</list>
     	</property> 
 	</bean>
@@ -40,6 +41,6 @@
 	
 	<!-- 可指定多个包，包与包之间用逗号或分号分隔 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="org.me.user.dao,org.me.system.dao,org.me.books.dao,org.me.note.dao" />
+		<property name="basePackage" value="org.me.user.dao,org.me.system.dao,org.me.books.dao,org.me.note.dao,org.me.security.dao" />
 	</bean>
 </beans>

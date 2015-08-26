@@ -1,11 +1,15 @@
 package org.me.system.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
-
+import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.me.core.common.Resoult;
+import org.me.core.util.UserUtils;
+import org.me.security.entity.Permission;
+import org.me.security.service.ISecurityService;
 import org.me.system.entity.Menu;
-import org.me.system.service.IMenuService;
+import org.me.user.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +27,7 @@ public class MenuController {
 	private Logger logger=Logger.getLogger(MenuController.class);
 	
 	@Resource
-	private IMenuService menuService;
+	private ISecurityService securityService;
 	
 	/**
 	 * @description: 查询
@@ -31,8 +35,12 @@ public class MenuController {
 	 * @date: 2015年7月7日 11:56:47
 	 */
 	@RequestMapping("/list")
-	public void list() {
-		
+	public ModelAndView list(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("forward:/system/menu/list.jsp");
+		User user=new UserUtils().getUser(request);
+		List<Permission> menuList=securityService.getPermissionsByLoginId(user.getStrLoginId(),-1,-1);
+		mav.addObject("menuList",menuList);
+		return mav;
 	}
 	
 	/**
@@ -40,15 +48,15 @@ public class MenuController {
 	 * @date: 2015年7月3日 18:14:21
 	 */
 	@RequestMapping("/add")
-	public ModelAndView add(Menu m) {
+	public ModelAndView add(Permission p) {
 		Resoult resoult=new Resoult();
 		resoult.setName("MenuController.add");
 		ModelAndView mav=new ModelAndView("/system/menu/edit.jsp");
-		if(StringUtils.hasText(m.getStrId())){
-			m.setStrPid(m.getStrId());
-			m.setStrId("");
+		if(StringUtils.hasText(p.getStrId())){
+			p.setStrPId(p.getStrId());
+			p.setStrId("");
 		}
-		mav.addObject("Menu", m);
+		mav.addObject("Permission", p);
 		return mav;
 	}
 
@@ -68,7 +76,7 @@ public class MenuController {
 			mav.addObject("resoult", resoult);
 			return mav;
 		}
-		resoult=menuService.get(m.getStrId());
+		//resoult=menuService.get(m.getStrId());
 		if(resoult.getCode()>0){
 			m=(Menu) resoult.getObject();
 		}else {
@@ -96,9 +104,9 @@ public class MenuController {
 			return resoult;
 		}
 		if(StringUtils.hasText(m.getStrId())){
-			resoult=menuService.update(m);
+			//resoult=menuService.update(m);
 		}else {
-			resoult=menuService.save(m);
+			//resoult=menuService.save(m);
 		}
 		return resoult;
 	}

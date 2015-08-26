@@ -22,19 +22,25 @@
 </div>
 
 <!-- 标签 -->
-<div class="nav"></div>
+<div class="nav">
+	<ul>
+		<c:forEach var="items" items="${menuList}">
+			<li onclick="changeMenu(${items.strId})">${items.strName}</li>
+		</c:forEach>
+	</ul>
+</div>
 
 <!-- main -->
 <div class="main" id="main">
 	<!-- 左边 -->
 	<div class="main_left">
-		<a class="left_a" href="/bookType/addBookType.do" target="iframe">添加账单类型</a>
-		<a class="left_a" href="/bookType/getByRange.do" target="iframe">查看账单类型</a>
-		<a class="left_a" href="/books/addBook.do" target="iframe">添加账单</a>
-		<a class="left_a" href="/books/getByRange.do" target="iframe">查看账单</a>
-		<a class="left_a" href="/note/add.do" target="iframe">添加留言</a>
-		<a class="left_a" href="/note/list.do" target="iframe">留言簿</a>
-		<a class="left_a" href="/system/menu/edit.do" target="iframe">添加菜单</a>
+		<c:forEach var="items" items="${menuList}">
+			<ul id="${items.strId}">
+				<c:forEach var="menu" items="${menuMap[items.strId]}">
+					<li><a class="left_a" href="${menu.strPermission}" target="iframe">${menu.strName}</a></li>
+				</c:forEach>
+			</ul>
+		</c:forEach>
 	</div>
 	<!-- 右边 -->
 	<div class="main_right">
@@ -71,6 +77,19 @@
 		var iframe = document.getElementById("iframe");
 		iframe.contentWindow.refresh();
 	}
+	
+	/**
+	 * @description: 菜单切换
+	 * @author: cheng_bo
+	 * @date: 2015年8月26日 15:50:07
+	 */
+	function changeMenu(id){
+		$(".main_left ul").each(function(){
+			$(this).css('display','none');
+		});
+		$('#'+id).css('display','block');
+	}
+	
 	
 	/**
 	 * @description: 弹框
